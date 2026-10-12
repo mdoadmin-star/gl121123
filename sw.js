@@ -1,8 +1,9 @@
 /* Offline cache: every file of the app (incl. the 26 MB Python engine) is kept on
    the tablet after the first start, so the app works without internet. */
-const CACHE = "gl121123-0c3d61a8d4";
+const CACHE = "gl121123-db56b6b6ef";
 const FILES = [
  "./",
+ ".nojekyll",
  "app.js",
  "defaults.js",
  "docs/GL121123_measurement_definitions.png",
@@ -13,7 +14,6 @@ const FILES = [
  "index.html",
  "manifest.webmanifest",
  "py/bridge.py",
- "py/core/__init__.py",
  "py/core/measure.py",
  "py/core/params.py",
  "py/core/simpart.py",

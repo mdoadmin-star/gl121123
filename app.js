@@ -2,7 +2,7 @@
    All measuring runs on the tablet (Python engine in a background worker).
    Same engine as the PC station. */
 "use strict";
-const APP_VERSION = "T1.0";
+const APP_VERSION = "T1.1";
 const $ = (id) => document.getElementById(id);
 const KEYS_TRUE = ["thread_len", "shoulder", "bend_start", "d12", "d14", "angle", "drop"];
 

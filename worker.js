@@ -3,7 +3,8 @@
 importScripts("runtime/pyodide.js");
 
 let py = null, xlsxLoaded = false;
-const PY_FILES = ["core/__init__.py", "core/measure.py", "core/training.py",
+// note: no "__init__.py" download - GitHub Pages hides files starting with "_"
+const PY_FILES = ["core/measure.py", "core/training.py",
   "core/trigger.py", "core/simpart.py", "core/params.py", "bridge.py"];
 
 async function init() {
@@ -12,8 +13,10 @@ async function init() {
   postMessage({ type: "status", text: "Loading OpenCV …" });
   await py.loadPackage(["numpy", "opencv-python"]);
   py.FS.mkdirTree("/app/core");
+  py.FS.writeFile("/app/core/__init__.py", "");
   for (const f of PY_FILES) {
     const r = await fetch("py/" + f);
+    if (!r.ok) throw new Error("File py/" + f + " missing on the web site (HTTP " + r.status + ") - upload the complete folder again");
     py.FS.writeFile("/app/" + f, await r.text());
   }
   py.runPython("import sys; sys.path.insert(0, '/app'); import bridge");
