@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GL121123 Tablet Guide</title>
+<style>
+:root{--tx:#1b2430;--mut:#5b6675;--line:#d9dee5;--acc:#1f6fd1;--bg:#fff;--box:#f3f6fa;--warn:#fff4e0;--ok:#e7f7ec}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--tx:#e6ebf1;--mut:#9aa6b5;--line:#34404f;--acc:#5aa2ff;--bg:#141920;--box:#1c232d;--warn:#3a2a10;--ok:#12301d}}
+body{background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,Segoe UI,Roboto,sans-serif;margin:0;padding:0 16px}
+main{max-width:860px;margin:0 auto;padding:24px 0 80px}
+h1{font-size:28px;margin:0 0 4px}h2{font-size:22px;margin:36px 0 10px;padding-top:12px;border-top:2px solid var(--line)}
+h3{font-size:17px;margin:20px 0 6px}
+.sub{color:var(--mut);margin-bottom:20px}
+ol li,ul li{margin:4px 0}
+.box{background:var(--box);border-radius:10px;padding:12px 16px;margin:12px 0}
+.warn{background:var(--warn);border-radius:10px;padding:12px 16px;margin:12px 0}
+.ok{background:var(--ok);border-radius:10px;padding:12px 16px;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:15px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--box)}
+code,kbd{background:var(--box);border-radius:4px;padding:1px 5px;font-size:14px}
+kbd{border:1px solid var(--line)}
+a{color:var(--acc)}
+.toc a{display:block;padding:2px 0}
+@media print{body{font-size:12px}h2{page-break-before:auto}.toc{display:none}}
+</style></head><body><main>
+
+<h1>GL121123 Inspector – Galaxy Tab A11 app</h1>
+<div class="sub">STUD SHOCKER MTG · drawing GL121123 rev 00 · tablet app T1.0 · complete guide from zero to live inspection</div>
+
+<div class="box"><b>What this is:</b> a stand-alone inspection app for the Galaxy Tab A11. It uses the tablet's own
+rear camera, and all measuring is done on the tablet with the same engine as the PC station. There is no laptop and no
+server, and after the first start it works <b>without internet</b>. It is an "installable web app": you install it once
+from Chrome, it gets an icon on the home screen and then opens like a normal app.</div>
+
+<div class="toc box"><b>Contents</b>
+<a href="#s1">1. What you need</a><a href="#s2">2. Hardware set-up (stand + backlight)</a>
+<a href="#s3">3. Put the app online once (laptop, 10 min)</a><a href="#s4">4. Install on the tablet</a>
+<a href="#s5">5. First start + camera set-up</a><a href="#s6">6. Calibration</a><a href="#s7">7. Accuracy training</a>
+<a href="#s8">8. Daily use (operator)</a><a href="#s9">9. Changing tolerances</a><a href="#s10">10. Reports / Excel</a>
+<a href="#s11">11. Backup, updates, second tablet</a><a href="#s12">12. Accuracy – what to expect</a>
+<a href="#s13">13. Troubleshooting</a></div>
+
+<h2 id="s1">1. What you need</h2>
+<table>
+<tr><th>Item</th><th>Notes</th></tr>
+<tr><td>Galaxy Tab A11</td><td>Android with current <b>Google Chrome</b> (update it in Play Store). Keep the charger connected at the station.</td></tr>
+<tr><td>Tablet stand (overhead / copy stand)</td><td>Holds the tablet <b>flat, screen up, camera looking straight down</b>, rigid, about 20–30 cm above the table. Any "overhead tablet holder" or a small copy stand works. It must not wobble.</td></tr>
+<tr><td>LED light pad (backlight)</td><td>A4 LED tracing pad or light box (white, flat, even). The part lies <b>on</b> it, so the camera sees a black silhouette on white. This matters most for accuracy.</td></tr>
+<tr><td>Master part</td><td>One good part, measured carefully (vernier / height gauge / CMM). Mark it "MASTER".</td></tr>
+<tr><td>Internet once</td><td>Only for steps 3 and 4. After that the app works offline.</td></tr>
+<tr><td>Laptop (one time)</td><td>Only to upload the app folder in step 3.</td></tr>
+</table>
+
+<h2 id="s2">2. Hardware set-up (most important for accuracy)</h2>
+<ol>
+<li>Put the LED pad on a stable table, away from windows and moving air. Switch it on at full brightness.</li>
+<li>Mount the tablet above the pad so the <b>rear camera</b> is over the middle of the pad, looking straight down.
+The tablet must be parallel to the pad (check with a spirit level app on the tablet).</li>
+<li>Height: the whole part plus about 1 cm all round must be visible. The part should fill about <b>60–75 %</b> of the
+picture width. Closer gives better resolution. Typical height is 20–30 cm.</li>
+<li>Switch off the ceiling light directly above, or shade it. Light from above makes the part shiny and grey instead of
+black. A simple cardboard hood around the stand helps a lot.</li>
+<li>Clean the camera lens with a soft cloth. Dirt shows as grey blobs.</li>
+<li>Lock everything. <b>After calibration nothing may move</b>: not the tablet, the stand, the pad or the zoom. If anything
+moves, do the calibration and training again (about 10 min).</li>
+</ol>
+<div class="warn"><b>Without a backlight</b> (part on paper, lit from above) the app still works, but edges are less
+sharp. Expect about 2–3× worse repeatability, especially on the diameters. The marks on your earlier test sheet also
+confuse the area check, so use a clean surface.</div>
+
+<h2 id="s3">3. Put the app online once (laptop, about 10 min)</h2>
+<p>The browser allows the camera only for apps that come from a secure <code>https://</code> address. So the app folder is
+uploaded once to a free web host. After installation the tablet keeps its own copy and does not need the host
+anymore. Nothing is ever sent from the tablet: pictures and results stay on the tablet.</p>
+
+<h3>Option A – GitHub Pages (recommended, free, permanent)</h3>
+<ol>
+<li>Unzip <code>GL121123_TabletApp.zip</code> on the laptop. You get the folder <code>GL121123_TabletApp</code>.</li>
+<li>Go to <a href="https://github.com/signup">github.com/signup</a> and create a free account (email + password).
+Remember the user name, for example <code>metaforge-qc</code>.</li>
+<li>Top right <kbd>+</kbd> → <b>New repository</b>. Name it <code>gl121123</code>, choose <b>Public</b> and click <b>Create repository</b>.
+(Free Pages needs a public repository. The app contains no company data, only the program.)</li>
+<li>On the new page, click the link <b>"uploading an existing file"</b>.</li>
+<li>Open the <code>GL121123_TabletApp</code> folder in Windows Explorer and select <b>everything inside it</b> with
+<kbd>Ctrl</kbd>+<kbd>A</kbd>: the folders <code>docs, icons, py, runtime</code> and the files <code>index.html, app.js …</code>.
+Drag them into the browser window. Wait until all files are listed (about 27 MB), then click <b>Commit changes</b>.</li>
+<li>Check that <code>index.html</code> is visible at the top level of the repository, not inside a sub-folder.</li>
+<li><b>Settings</b> (in the repository) → <b>Pages</b> (left) → under "Branch" select <b>main</b> and <b>/(root)</b> → <b>Save</b>.</li>
+<li>Wait 1–3 minutes and refresh. The page shows "Your site is live at
+<code>https://YOUR-USER.github.io/gl121123/</code>". That is your app address. Write it down.</li>
+<li>Test it: open the address on the laptop in Chrome. The loading screen should appear and then the app, with a "NO CAMERA"
+or webcam picture.</li>
+</ol>
+
+<h3>Option B – Netlify Drop</h3>
+<ol>
+<li>Open <a href="https://app.netlify.com/drop">app.netlify.com/drop</a> and sign up (free).</li>
+<li>Drag the whole <code>GL121123_TabletApp</code> folder onto the page. You get an address like <code>https://name-123.netlify.app</code>.</li>
+<li>Claim the site in your account, or it is deleted after a short time. Netlify says files over 10 MB can stall on Drop.
+If the upload hangs on the OpenCV file, use Option A.</li>
+</ol>
+
+<h2 id="s4">4. Install on the Galaxy Tab A11</h2>
+<ol>
+<li>Connect the tablet to Wi-Fi. Open <b>Chrome</b> (not Samsung Internet) and type the app address from step 3.</li>
+<li>The loading screen appears ("Starting Python … Loading OpenCV …"). The first time it takes <b>20–60 s</b>.</li>
+<li>Chrome asks <b>"Allow … to use your camera?"</b>: tap <b>Allow</b> (or "Allow while using the app").</li>
+<li>Wait for the message <b>"App saved on this tablet – works offline now"</b>.</li>
+<li>Chrome menu <kbd>⋮</kbd> → <b>Add to Home screen</b> → <b>Install</b> (or tap the "Install app" banner if it appears).</li>
+<li>Close Chrome. Open the app from the new <b>GL121123</b> icon on the home screen. It opens full screen, without an address bar.</li>
+<li>Test offline: switch on flight mode and open the app again. It must start normally.</li>
+</ol>
+<div class="box"><b>Recommended tablet settings:</b>
+<ul>
+<li>Settings → Battery → Background usage limits: do not put Chrome to sleep.</li>
+<li>Settings → Display → Screen timeout: 10 min. The app also keeps the screen on while it is open.</li>
+<li>Auto-rotate: either orientation works. Landscape is best (picture left, results right).</li>
+</ul></div>
+
+<h2 id="s5">5. First start + camera set-up (Setup tab)</h2>
+<ol>
+<li><b>Camera:</b> the rear camera starts automatically. In <b>Setup → 1. Camera</b> you can see e.g.
+"Camera gives 3264×2448 px". If the wrong camera is shown, choose the rear camera in the list. Leave resolution at
+<b>Highest</b>. If one inspection takes more than about 6 s, choose 2560×1920 (and calibrate again).</li>
+<li>Place a part on the pad and wait until the picture is sharp (if it stays blurred, tap <b>Auto focus + exposure</b> or use the focus slider). When the part is sharp, tap
+<b>Lock focus + exposure</b> so the picture cannot change between parts. If the tablet does not support locking, it
+says so. That is OK with a backlight. Use the brightness slider, if shown, so the pad is white but not "burnt".</li>
+<li><b>Image check:</b> tap <b>Check image</b>. Aim for a background of 180–245, white-clipped under 20 %, and the text
+"Part found".</li>
+<li><b>Inspection area:</b> tap <b>Set area</b> (under the picture) and drag a box around the place where parts will
+lie, about 1 cm bigger than the part on all sides. Tap <b>Done</b>. Anything outside the box is ignored. <b>Zoom</b> shows
+only the area, bigger.</li>
+</ol>
+<div class="box">Want to try the app before the hardware is ready? Use <b>Setup → Demo mode</b>. It simulates a camera
+and parts. Tap <b>Next part (demo)</b> and the auto-inspection runs. Switch demo mode off again for real use.</div>
+
+<h2 id="s6">6. Calibration (mm per pixel) – required</h2>
+<p>First enter the master's true values: <b>Training tab → 1. Master true values</b>. Measure the master carefully and
+type all 7 values. You need them for method A and for training.</p>
+<p>See <code>docs/GL121123_measurement_definitions.png</code> for exactly where each length is measured from and to.</p>
+<h3>Method A – with the master (recommended)</h3>
+<ol><li>Place the master in the middle of the area and wait until the banner shows "PART READY" or the countdown.</li>
+<li>Setup → <b>Measure master → set scale</b>. The app shows the new mm/px. Then continue with training (step 7).</li></ol>
+<h3>Method B – printed checkerboard</h3>
+<ol><li>Print <code>docs/calibration_checkerboard_10mm_A4.pdf</code> at <b>100 % / actual size</b>. Check one square = 10.00 mm with a vernier.</li>
+<li>Lay it flat on the pad (switch the pad off if the paper glows through), where the part lies.</li>
+<li>Enter the lens height above the table (approximately), then tap <b>Calibrate with checkerboard</b>. The app also tells you if the tablet is tilted.</li></ol>
+<p>The Inspect tab shows a yellow warning while the app is not calibrated, or when the camera resolution has changed since calibration.</p>
+
+<h2 id="s7">7. Accuracy training (required, 10 minutes)</h2>
+<p>A phone or tablet lens sees the part from one point, so a part near the edge of the picture looks slightly different
+from one in the middle. Training measures the master 10–20 times at different positions. From that, the app learns
+the exact camera height and centre, corrects every measurement, and tells you how accurate each parameter really
+is.</p>
+<ol>
+<li><b>Training</b> tab. Check that the true values are filled in.</li>
+<li>Switch on <b>Auto-capture every time the master is placed</b>.</li>
+<li>Place the master, take your hand away and wait. After 2 s the banner shows "CAPTURED 1". Move the master to a new
+position and wait again. Repeat 12–20 times. Cover the centre, all 4 corners and the edges, turned ±20°, with the thread
+pointing left and pointing right. Blue dots show where you already captured.</li>
+<li>Switch auto-capture off and tap <b>Analyse accuracy</b>. On the tablet this takes about 0.5–2 minutes.</li>
+<li>Read the result table:
+<table><tr><th>Verdict</th><th>Meaning</th></tr>
+<tr><td style="color:#16a34a"><b>GOOD</b></td><td>Error (6σ) &lt; 10 % of the tolerance: reliable.</td></tr>
+<tr><td style="color:#d97706"><b>ACCEPTABLE</b></td><td>10–30 %: usable; parts very near a limit can be judged wrong. Recheck those manually.</td></tr>
+<tr><td style="color:#dc2626"><b>NOT CAPABLE</b></td><td>&gt; 30 %: do not trust this parameter. Keep the manual gauge for it.</td></tr></table>
+Red or yellow messages under the table explain problems in plain words, for example "images not stable", "master
+moved", or "captures only in the centre".</li>
+<li>If the result is valid, tap <b>Apply to inspection</b>. <b>Undo last training</b> goes back to the previous calibration.</li>
+</ol>
+
+<h2 id="s8">8. Daily use (operator)</h2>
+<ol>
+<li>Open the <b>GL121123</b> app. Wait for the loading screen to finish (5–20 s). Type your name under <b>Operator</b> once.</li>
+<li>Check: the banner shows <b>PLACE PART</b> and there is no yellow warning.</li>
+<li><b>Morning check:</b> place the master once. All values must be OK and close to the master's true values. If not, see Troubleshooting.</li>
+<li>For each part: place it in the yellow area, then <b>take your hand out</b>. The banner shows HOLD STILL, then a countdown
+2.0 → 0.0 s, then INSPECTING, then a big <b style="color:#16a34a">OK</b> or <b style="color:#dc2626">NG</b>.</li>
+<li>On NG the failing parameters are written in the red banner and shown red in the table (LOW / HIGH / NOT FOUND), with a
+beep. A photo of the NG part is saved automatically.</li>
+<li>Remove the part. The banner returns to PLACE PART, ready for the next part.</li>
+<li><b>Inspect now</b> starts a measurement immediately, without the 2 s wait.</li>
+</ol>
+<div class="box">The bar under each value shows where the value sits within the tolerance: left edge = lower limit, right
+edge = upper limit. Values close to an edge mean the process is drifting.</div>
+
+<h2 id="s9">9. Changing length / tolerance (Settings tab)</h2>
+<ol>
+<li><b>Settings</b> → password (default <b>1234</b>; change it at the bottom of Settings).</li>
+<li>Edit nominal, tol − and tol + for each parameter. Untick <b>On</b> to stop checking a parameter. Values marked * came
+from "unspecified tolerance ABS00002": Ø14 ±0.2, angle ±0.5°, drop ±0.3. <b>Confirm these with Quality.</b></li>
+<li><b>Offset</b> is set by training. Change it by hand only if you know why.</li>
+<li>Also in Settings: wait time (default 2 s), frames averaged, which photos are saved, and beep.</li>
+<li>Tap <b>Save settings</b>.</li>
+</ol>
+
+<h2 id="s10">10. Reports / Excel (History tab)</h2>
+<ul>
+<li>Shows all inspections: today, last 7 days or all. Tap <b>Photo</b> on an NG line to see the saved picture with the values.</li>
+<li><b>Export Excel</b> creates an .xlsx with every part and every value. Red cells are out of tolerance. A Summary sheet shows
+yield, mean, standard deviation and Cpk per parameter. You can <b>Share</b> it (WhatsApp, Gmail, Drive …) or save it to
+<b>Downloads</b>. <b>Export CSV</b> works the same way.</li>
+<li>Data stays on the tablet until you tap <b>Delete history</b> (password needed). Export weekly.</li>
+</ul>
+
+<h2 id="s11">11. Backup, updates, second tablet</h2>
+<ul>
+<li><b>Backup:</b> Settings → <b>Save backup file</b> saves the calibration, training, tolerances and password to Downloads.
+After a tablet reset, use <b>Restore backup</b>.</li>
+<li><b>Update the app:</b> upload the changed files to the same GitHub repository (Add file → Upload files). Then open the app
+on the tablet once with internet. It shows "App updated – close and reopen". Calibration and history are kept.</li>
+<li><b>Second tablet:</b> install from the same address (step 4) and restore the backup. If the stand or tablet is
+different, do the calibration and training again on that station.</li>
+<li>Do not use "Clear data" for Chrome or the app in Android settings. That deletes the calibration and history.
+Make a backup first.</li>
+</ul>
+
+<h2 id="s12">12. Accuracy – what to expect with the tablet camera</h2>
+<p>The tablet camera has a small lens and a cheaper sensor than the Daheng 20 MP camera. With a good backlight and training,
+expect about:</p>
+<table>
+<tr><th>Parameter</th><th>Tolerance</th><th>Expected</th><th>Use</th></tr>
+<tr><td>Bend angle 41.5°</td><td>±0.5°</td><td>±0.1°</td><td>reliable</td></tr>
+<tr><td>Thread length 17.5</td><td>+0.5/0</td><td>±0.05–0.1</td><td>reliable</td></tr>
+<tr><td>Ø14</td><td>±0.2</td><td>±0.03–0.06</td><td>mostly reliable</td></tr>
+<tr><td>Drop 37.7</td><td>±0.3</td><td>±0.08–0.15</td><td>usable – see training verdict</td></tr>
+<tr><td>Length to bend 59</td><td>+0.3/0</td><td>±0.08–0.15</td><td>borderline – see training verdict</td></tr>
+<tr><td>Shoulder 49.2</td><td>+0.2/0</td><td>±0.08–0.15</td><td>borderline – see training verdict</td></tr>
+<tr><td>Ø12</td><td>±0.05</td><td>±0.03–0.05</td><td><b>not reliable – keep the snap gauge</b></td></tr>
+</table>
+<p>The training verdict on <b>your</b> station is the real answer. Use the app as a 100 % screening check for
+thread, angle, Ø14 and drop. For any parameter the training marks NOT CAPABLE, keep the manual gauge.</p>
+
+<h2 id="s13">13. Troubleshooting</h2>
+<table>
+<tr><th>Problem</th><th>Fix</th></tr>
+<tr><td>Loading screen stays / "Engine could not start"</td><td>Close the app completely (recent apps → swipe away) and open it again. If it repeats, open once with internet. The tablet needs about 500 MB of free memory: close other apps.</td></tr>
+<tr><td>"Camera blocked"</td><td>Android Settings → Apps → Chrome → Permissions → Camera → Allow. In the app, tap the lock icon / site settings → Camera → Allow.</td></tr>
+<tr><td>Front camera shown</td><td>Setup → camera list → choose the rear ("back" / "environment") camera.</td></tr>
+<tr><td>Banner always "REMOVE HAND"</td><td>Something dark touches the yellow area border: a hand, cable, marks on the paper, or the pad edge. Make the area smaller, or clean the surface.</td></tr>
+<tr><td>Banner stays "HOLD STILL"</td><td>The tablet or stand vibrates, or the light flickers. Fix the stand. Settings → stillness limit can be raised from 1.5 to 3.</td></tr>
+<tr><td>Never starts – "PLACE PART" with the part there</td><td>Too little contrast. Use the backlight, or Settings → Threshold = Fixed with a value of about 100.</td></tr>
+<tr><td>"Part end not found" / NOT FOUND values</td><td>The part is partly outside the area, there is dirt on the pad, the part is shiny or grey (too much light from above), or the picture is blurred. Run Check image.</td></tr>
+<tr><td>Yellow toast "Ø14 reads x % off"</td><td>The tablet moved or zoom changed. Calibrate and train again.</td></tr>
+<tr><td>"RECALIBRATE – resolution changed"</td><td>Select the same resolution as during calibration, or calibrate again.</td></tr>
+<tr><td>Same part gives different values</td><td>Lock focus and exposure; use the backlight; make the stand rigid; raise "frames averaged" to 5.</td></tr>
+<tr><td>Inspection takes more than 6 s</td><td>Setup → resolution 2560×1920 (then calibrate and train again). Close other apps.</td></tr>
+<tr><td>Excel does not open on the tablet</td><td>Install Microsoft Excel or Google Sheets from the Play Store, or share the file to the PC.</td></tr>
+</table>
+
+<p class="sub" style="margin-top:30px">Files in this package: <code>index.html, app.js, style.css, worker.js, sw.js, manifest.webmanifest,
+defaults.js</code> (app) · <code>py/</code> (measuring engine, same as the PC station) · <code>runtime/</code> (Python + NumPy + OpenCV for
+the browser) · <code>icons/</code> · <code>docs/</code> (this guide, checkerboard PDF, measurement definitions).</p>
+</main></body></html>

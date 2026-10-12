@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#14181f">
+<title>GL121123 Inspector</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ loading screen ============ -->
+<div id="loader">
+  <div class="ld-box">
+    <img src="icons/icon-192.png" alt="" width="96" height="96">
+    <h1>GL121123 Inspector</h1>
+    <div id="ld-text">Starting …</div>
+    <div class="ld-bar"><div id="ld-fill"></div></div>
+    <div class="ld-hint">First start can take 20–40 s while the measuring engine loads.</div>
+  </div>
+</div>
+
+<div id="app">
+  <!-- ============ camera / image stage ============ -->
+  <section id="stage-wrap">
+    <div id="banner" class="b-wait"><span id="banner-text">STARTING</span><span id="banner-sub"></span></div>
+    <div id="stage">
+      <canvas id="view"></canvas>
+      <canvas id="ovl"></canvas>
+      <div id="stage-msg"></div>
+    </div>
+    <div id="stage-bar">
+      <button id="btn-inspect" class="big">Inspect now</button>
+      <label class="tgl"><input type="checkbox" id="chk-auto" checked><span>Auto 2 s</span></label>
+      <button id="btn-roi">Set area</button>
+      <button id="btn-zoom" title="Zoom view to the inspection area">Zoom</button>
+      <span id="trig-info" class="muted"></span>
+      <button id="btn-full" title="Full screen">⛶</button>
+    </div>
+  </section>
+
+  <!-- ============ side panel ============ -->
+  <section id="panel">
+    <nav id="tabs">
+      <button data-tab="inspect" class="on">Inspect</button>
+      <button data-tab="setup">Setup</button>
+      <button data-tab="train">Training</button>
+      <button data-tab="history">History</button>
+      <button data-tab="settings">Settings</button>
+    </nav>
+
+    <!-- ---------- INSPECT ---------- -->
+    <div class="tab on" id="tab-inspect">
+      <div id="cal-warn" class="warn hidden"></div>
+      <div class="counters">
+        <div><b id="c-total">0</b><span>Total</span></div>
+        <div class="ok"><b id="c-ok">0</b><span>OK</span></div>
+        <div class="ng"><b id="c-ng">0</b><span>NG</span></div>
+        <div><b id="c-yield">–</b><span>Yield</span></div>
+      </div>
+      <table class="res" id="res-table">
+        <thead><tr><th>Parameter</th><th>Value</th><th>Limits</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div id="res-info" class="muted small"></div>
+      <div class="row">
+        <label>Operator <input id="operator" type="text" placeholder="name"></label>
+        <button id="btn-reset-count">Reset counters</button>
+      </div>
+    </div>
+
+    <!-- ---------- SETUP ---------- -->
+    <div class="tab" id="tab-setup">
+      <h3>1. Camera</h3>
+      <div class="row">
+        <select id="cam-select"></select>
+        <select id="cam-res">
+          <option value="4096x3072">Highest</option>
+          <option value="3264x2448">3264×2448</option>
+          <option value="2560x1920">2560×1920</option>
+          <option value="1920x1440">1920×1440</option>
+          <option value="1920x1080">1920×1080</option>
+        </select>
+        <button id="btn-cam-start">Start camera</button>
+      </div>
+      <div class="row">
+        <label class="tgl"><input type="checkbox" id="chk-demo"><span>Demo mode (no camera, simulated parts)</span></label>
+      </div>
+      <div id="cam-info" class="muted small"></div>
+      <div id="cam-ctrls"></div>
+      <div class="row">
+        <button id="btn-lock">Lock focus + exposure</button>
+        <button id="btn-unlock">Auto focus + exposure</button>
+      </div>
+
+      <h3>2. Image check <span class="muted small">(place the part first)</span></h3>
+      <div class="row"><button id="btn-check">Check image</button></div>
+      <div id="check-out" class="small"></div>
+
+      <h3>3. Inspection area</h3>
+      <p class="small">Tap <b>Set area</b> under the picture, then drag a box around the place where the part lies
+        (leave about 1 cm free around the part). Tap <b>Set area</b> again to finish.</p>
+      <div class="row"><button id="btn-roi-clear">Use whole picture</button></div>
+
+      <h3>4. Calibration (mm per pixel)</h3>
+      <div id="cal-status" class="calbox"></div>
+      <details open>
+        <summary>A. With the master part (recommended)</summary>
+        <p class="small">Enter the master's true values in the <b>Training</b> tab once. Place the master in the
+          middle of the area, wait until it is still, then tap:</p>
+        <button id="btn-cal-master">Measure master → set scale</button>
+      </details>
+      <details>
+        <summary>B. With the printed checkerboard</summary>
+        <p class="small">Print <b>calibration_checkerboard_10mm_A4.pdf</b> at 100 % (no "fit to page"). Check one
+          square with a vernier = 10.00 mm. Lay it flat where the part lies.</p>
+        <div class="row">
+          <label>Inner corners <input id="cb-cols" type="number" value="9" class="n"> × <input id="cb-rows" type="number" value="6" class="n"></label>
+          <label>Square mm <input id="cb-sq" type="number" step="0.01" value="10" class="n"></label>
+          <label>Lens height above table mm <input id="cb-h" type="number" value="250" class="n"></label>
+        </div>
+        <button id="btn-cal-cb">Calibrate with checkerboard</button>
+      </details>
+      <details>
+        <summary>C. Enter manually</summary>
+        <div class="row"><label>mm per pixel <input id="cal-k" type="number" step="0.00001" class="w8"></label>
+          <button id="btn-cal-k">Save</button></div>
+      </details>
+      <div id="cal-out" class="small"></div>
+    </div>
+
+    <!-- ---------- TRAINING ---------- -->
+    <div class="tab" id="tab-train">
+      <p class="small"><b>Accuracy training</b> learns the camera geometry from one <b>master part</b> placed
+        10–20 times at different positions and angles in the area. Do this after calibration and every time the
+        tablet or stand was moved.</p>
+      <h3>1. Master true values <span class="muted small">(measure with vernier / CMM)</span></h3>
+      <div id="true-grid" class="grid2"></div>
+      <h3>2. Captures <span id="cap-n" class="pill">0</span></h3>
+      <div class="row">
+        <label class="tgl"><input type="checkbox" id="chk-capauto"><span>Auto-capture every time the master is placed</span></label>
+      </div>
+      <div class="row">
+        <button id="btn-cap">Capture now</button>
+        <button id="btn-cap-undo">Delete last</button>
+        <button id="btn-cap-clear">Delete all</button>
+      </div>
+      <p class="small muted">Move the master after each capture: centre, 4 corners, edges, turned ±20°, both ends
+        left/right. The dots on the picture show where captures were taken.</p>
+      <h3>3. Analyse</h3>
+      <div class="row"><button id="btn-analyse" class="primary">Analyse accuracy</button>
+        <span id="an-prog" class="muted small"></span></div>
+      <div id="an-out"></div>
+      <div class="row">
+        <button id="btn-apply" class="primary" disabled>Apply to inspection</button>
+        <button id="btn-undo-train">Undo last training</button>
+        <button id="btn-persp-off">Switch off 3D correction</button>
+      </div>
+    </div>
+
+    <!-- ---------- HISTORY ---------- -->
+    <div class="tab" id="tab-history">
+      <div class="row">
+        <button id="btn-xlsx" class="primary">Export Excel</button>
+        <button id="btn-csv">Export CSV</button>
+        <select id="hist-range">
+          <option value="today">Today</option>
+          <option value="7">Last 7 days</option>
+          <option value="all">All</option>
+        </select>
+        <button id="btn-hist-clear">Delete history</button>
+      </div>
+      <div id="hist-sum" class="small"></div>
+      <div class="scroll">
+        <table class="res" id="hist-table">
+          <thead><tr><th>#</th><th>Time</th><th>Result</th><th>Failed</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ---------- SETTINGS ---------- -->
+    <div class="tab" id="tab-settings">
+      <div id="set-lock">
+        <p>Settings are protected.</p>
+        <div class="row"><input id="pw" type="password" placeholder="password" class="w8">
+          <button id="btn-unlock-set">Unlock</button></div>
+        <p class="small muted">Default password: 1234 (change it below after unlocking).</p>
+      </div>
+      <div id="set-body" class="hidden">
+        <h3>Parameters &amp; tolerances</h3>
+        <p class="small muted">LSL = nominal − tol−, USL = nominal + tol+. Values with * come from "unspecified
+          tolerance ABS00002" – confirm with Quality. Offset is added to the measured value (training sets it).</p>
+        <div class="scroll-x"><table class="edit" id="par-table">
+          <thead><tr><th>On</th><th>Parameter</th><th>Nominal</th><th>tol −</th><th>tol +</th><th>Offset</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+        <h3>Inspection</h3>
+        <div class="grid2">
+          <label>Wait time before auto inspection (s)<input id="s-delay" type="number" step="0.1"></label>
+          <label>Stillness limit (% of part changing)<input id="s-motion" type="number" step="0.1"></label>
+          <label>Minimum part size (% of area)<input id="s-minarea" type="number" step="0.1"></label>
+          <label>Frames averaged per inspection<input id="s-avg" type="number" min="1" max="8"></label>
+          <label>Threshold
+            <select id="s-thmode"><option value="otsu">Automatic (Otsu)</option><option value="fixed">Fixed</option></select></label>
+          <label>Fixed threshold (0–255)<input id="s-thfix" type="number"></label>
+          <label>Save pictures
+            <select id="s-save"><option value="fail">NG only</option><option value="all">All</option><option value="none">None</option></select></label>
+          <label>Beep on NG<select id="s-beep"><option value="1">Yes</option><option value="0">No</option></select></label>
+        </div>
+        <div class="row">
+          <button id="btn-save-set" class="primary">Save settings</button>
+          <button id="btn-defaults">Reset tolerances to drawing</button>
+        </div>
+        <h3>Backup</h3>
+        <div class="row">
+          <button id="btn-backup">Save backup file</button>
+          <label class="filebtn">Restore backup<input id="file-restore" type="file" accept=".json,application/json"></label>
+        </div>
+        <h3>Password</h3>
+        <div class="row"><input id="pw-new" type="password" placeholder="new password" class="w8">
+          <button id="btn-pw">Change password</button></div>
+        <h3>About</h3>
+        <div class="small muted" id="about"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="toast"></div>
+<div id="modal" class="hidden"><div class="m-box"><div id="m-body"></div>
+  <div class="row right"><button id="m-close">Close</button></div></div></div>
+
+<script src="defaults.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
