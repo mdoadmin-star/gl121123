@@ -117,3 +117,13 @@ table.stats th:first-child, table.stats td:first-child { text-align: left; }
 #modal { position: fixed; inset: 0; background: #000a; z-index: 70; display: flex; align-items: center; justify-content: center; }
 .m-box { background: var(--panel); border-radius: 12px; padding: 14px; max-width: 94vw; max-height: 92vh; overflow: auto; }
 .m-box img { max-width: 88vw; max-height: 70vh; display: block; }
+
+/* phones (e.g. OnePlus 13s portrait) */
+@media (max-width: 600px) {
+  #stage-bar { flex-wrap: wrap; }
+  #trig-info { flex-basis: 100%; order: 9; text-align: left; }
+  #banner { min-height: 48px; gap: 10px; }
+  #banner-text { font-size: 28px; }
+  #banner-sub { font-size: 13px; }
+  #tabs button { font-size: 13px; padding: 11px 2px; }
+}

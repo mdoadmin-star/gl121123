@@ -1,6 +1,6 @@
 /* Offline cache: every file of the app (incl. the 26 MB Python engine) is kept on
    the tablet after the first start, so the app works without internet. */
-const CACHE = "gl121123-db56b6b6ef";
+const CACHE = "gl121123-0aab32f42e";
 const FILES = [
  "./",
  ".nojekyll",
